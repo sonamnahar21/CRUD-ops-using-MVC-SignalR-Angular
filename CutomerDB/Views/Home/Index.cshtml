@@ -1,0 +1,52 @@
+﻿@model IList<CutomerDB.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />"
+
+<div>
+    <h3 style="color: green">CRUD using SignalR,MVC and Entity Framework</h3>
+    <div><button id="btnInsert" onclick="ShowCustomerTable()">Add Customer</button></div>
+    <table id="customerDetails">
+        <tr>
+            <td>
+                <h1 style="color:blueviolet">Add/Update/Delete Customers</h1>
+                <table border="1">
+                    <tr>
+                        <td>Customer Name</td>
+                        <td><input id="txtCustomerName" type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td>Email Address</td>
+                        <td><input id="txtEmail" type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile Number</td>
+                        <td><input id="txtMobile" type="text" /></td>
+                    </tr>
+                </table>
+                <table border="1">
+                    <tr>
+                        <td><button id="btnPostEmployee" onclick="InsetCustomer()">Add New Customer</button></td>
+                        <td>
+                            <button id="btnPutEmployee" onclick="UpdateCustomer()">Update Customer</button>
+                            <button id="btnDeleteEmployee" onclick="DeleteCustomer(); return false;">Delete Customer</button>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="dataTable"></div>
+</div>
+
+@section JavaScript{
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.1.js"></script>
+    <script src="../signalr/hubs"></script>
+
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/app.js"></script>
+
+}

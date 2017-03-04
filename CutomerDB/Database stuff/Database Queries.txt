@@ -1,0 +1,8 @@
+﻿CREATE TABLE customers
+(
+CustomerID int NOT NULL AUTO_INCREMENT,
+CustomerName VARCHAR(20),
+EmailAdress VARCHAR(20), 
+MobileNumber VARCHAR(20),
+PRIMARY KEY (CustomerID)
+)
