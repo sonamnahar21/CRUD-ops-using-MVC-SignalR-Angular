@@ -1,11 +1,13 @@
 ﻿using CutomerDB.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace CutomerDB.Controllers
 {
@@ -65,6 +67,48 @@ namespace CutomerDB.Controllers
             return RedirectToAction("Index");
         }
 
-        
+        //Update Customer Record
+        public ActionResult Update()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Update(Customer customer)
+        {
+            using (var context = new CustomerContext())
+            {
+                var custRecord = context.Customers.Find(customer.CustomerID);
+
+                custRecord.CustomerName = customer.CustomerName;
+                custRecord.EmailAdress = customer.EmailAdress;
+                custRecord.MobileNumber = customer.MobileNumber;
+
+                context.Customers.Add(custRecord);
+
+                context.Entry(custRecord).State = EntityState.Modified;
+                context.SaveChanges();
+            }
+
+            //Once the record is inserted , then notify all the subscribers (Clients)
+            CustomerHub.NotifyCurrentCustomerInformationToAllClients();
+            return RedirectToAction("Index");
+        }
+
+        //Delete Customer Record
+        [HttpPost]
+        public ActionResult Delete(Customer customer)
+        {
+            using (var context = new CustomerContext())
+            {
+                var custRecord = context.Customers.Find(customer.CustomerID);
+                context.Customers.Remove(custRecord);
+                context.SaveChanges();
+            }
+
+            //Once the record is inserted , then notify all the subscribers (Clients)
+            CustomerHub.NotifyCurrentCustomerInformationToAllClients();
+            return RedirectToAction("Index");
+        }
+
     }
 }

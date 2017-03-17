@@ -7,12 +7,20 @@
 
 <div>
     <h3 style="color: green">CRUD using SignalR,MVC and Entity Framework</h3>
-    <div><button id="btnInsert" onclick="ShowCustomerTable()">Add Customer</button></div>
+    <div>
+        <button id="btnInsert" onclick="ShowCustomerTable('insert')">Add Customer</button>
+        <button id="btnUpload" onclick="ShowCustomerTable('update')">Update Customer</button>
+        <button id="btnDelete" onclick="ShowCustomerTable('delete')">Delete Customer</button>
+    </div>
     <table id="customerDetails">
         <tr>
             <td>
                 <h1 style="color:blueviolet">Add/Update/Delete Customers</h1>
                 <table border="1">
+                    <tr>
+                        <td>Customer ID</td>
+                        <td><input id="txtCustomerID" type="text" /></td>
+                    </tr>
                     <tr>
                         <td>Customer Name</td>
                         <td><input id="txtCustomerName" type="text" /></td>
@@ -30,8 +38,8 @@
                     <tr>
                         <td><button id="btnPostEmployee" onclick="InsetCustomer()">Add New Customer</button></td>
                         <td>
-                            <button id="btnPutEmployee" onclick="UpdateCustomer()">Update Customer</button>
-                            <button id="btnDeleteEmployee" onclick="DeleteCustomer(); return false;">Delete Customer</button>
+                            <button id="btnUploadCustomer" onclick="UpdateCustomer()">Update Customer</button>
+                            <button id="btnDeleteCustomer" onclick="DeleteCustomer(); return false;">Delete Customer</button>
                         </td>
                     </tr>
                 </table>

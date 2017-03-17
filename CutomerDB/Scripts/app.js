@@ -21,10 +21,55 @@ function FetchCustomers() {
         success: function (result) { model.empty().append(result); }
     })
 }
-function ShowCustomerTable()
+function ShowCustomerTable(ops)
 {
     document.getElementById("customerDetails").style.display = "block";
+    if (ops === "delete")
+    {
+        //
+    }
+}
+function UpdateCustomer()
+{
+    var customer = {
+        CustomerID: $('#txtCustomerID').val(),
+        CustomerName: $('#txtCustomerName').val(),
+        EmailAdress: $('#txtEmail').val(),
+        MobileNumber: $('#txtMobile').val()
+    };
 
+    $.ajax({
+        url: '/home/Update',
+        type: 'POST',
+        data: JSON.stringify(customer),
+        contentType: "application/json;charset=utf-8",
+        success: function (data) {
+            alert('Customer updated Successfully');
+        },
+        error: function (e) {
+            console.log(e);
+            alert('Customer could not be updated');
+        }
+    });
+}
+function DeleteCustomer()
+{
+    var customer = {
+        CustomerID: $('#txtCustomerID').val()
+    };
+
+    $.ajax({
+        url: '/home/Delete',
+        type: 'POST',
+        data: JSON.stringify(customer),
+        contentType: "application/json;charset=utf-8",
+        success: function (data) {
+            alert('Customer deleted Successfully');
+        },
+        error: function (x, y, z) {
+            alert(x + '\n' + y + '\n' + z);
+        }
+    });
 }
 function InsetCustomer() {
     var customer = {
